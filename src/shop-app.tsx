@@ -10,10 +10,24 @@ import img1 from "./images/img1.png";
 import img2 from "./images/img2.png";
 import styles from "./shopApp.module.css";
 
-export class ShopApp extends React.Component<
-  {},
-  { products: any[]; isOpen: boolean; isShowingMessage: boolean; message: string; numFavorites: number; prodCount: number }
-> {
+interface Product {
+  title: string;
+  description: string;
+  price: string;
+  isFavorite: boolean;
+}
+
+interface ShopAppState {
+  products: Product[];
+  isOpen: boolean;
+  isShowingMessage: boolean;
+  message: string;
+  numFavorites: number;
+  prodCount: number;
+}
+
+
+export class ShopApp extends React.Component<{}, ShopAppState> {
   constructor(props: any) {
     super(props);
 
