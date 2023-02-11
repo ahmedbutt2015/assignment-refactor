@@ -1,14 +1,10 @@
 import * as React from "react";
 import lodash from 'lodash';
-import Modal from "react-modal";
-import { FaTimes } from "react-icons/fa";
 import { Button } from "./components/button";
 import ProductList from "./components/product-list-components";
-import { Form } from "./components/form";
-import logo from "./images/droppe-logo.png";
-import img1 from "./images/img1.png";
-import img2 from "./images/img2.png";
 import styles from "./shopApp.module.css";
+import AddProductModal from "./components/add-product-modal";
+import Header from './components/header';
 
 interface Product {
   title: string;
@@ -128,19 +124,7 @@ export class ShopApp extends React.Component<{}, ShopAppState> {
     const { products, isOpen } = this.state;
     return (
       <>
-        <div className={styles.header}>
-          <div className={['container', styles.headerImageWrapper].join(' ')}>
-            <img src={logo} className={styles.headerImage} alt="Logo" />
-          </div>
-        </div>
-
-        <>
-          <span className={['container', styles.imgContainer, styles.main].join(' ')} >
-            <img src={img1} className={styles.headerImg} alt="First Header" />
-            <img src={img2} className={styles.headerImg} alt="Second Header" />
-          </span>
-        </>
-
+        <Header />
         <div className={['container', styles.main].join(' ')} style={{ paddingTop: 0 }}>
           <div className={styles.buttonWrapper}>
             <span role="button">
@@ -166,28 +150,7 @@ export class ShopApp extends React.Component<{}, ShopAppState> {
           {products && !!products.length ? <ProductList products={products} onFav={this.favClick} /> : <div></div>}
         </div>
 
-        <>
-          <Modal
-            isOpen={isOpen}
-            className={styles.reactModalContent}
-            overlayClassName={styles.reactModalOverlay}
-          >
-            <div className={styles.modalContentHelper}>
-              <div
-                className={styles.modalClose}
-                onClick={function (this: any) {
-                  this.setState({
-                    isOpen: false,
-                  });
-                }.bind(this)}
-              ><FaTimes /></div>
-
-              <Form
-                on-submit={this.onSubmit}
-              />
-            </div>
-          </Modal>
-        </>
+        <AddProductModal isOpen={isOpen} onSubmit={this.onSubmit} />
       </>
     );
   }
