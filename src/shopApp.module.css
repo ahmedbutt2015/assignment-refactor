@@ -75,3 +75,14 @@
   top: 0;
   right: 0;
 }
+
+.imgContainer { 
+  margin: 50px inherit;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.headerImg { 
+  max-height: 15em;
+  display: block;
+}

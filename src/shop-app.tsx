@@ -127,20 +127,17 @@ export class ShopApp extends React.Component<{}, ShopAppState> {
   render() {
     const { products, isOpen } = this.state;
     return (
-      <React.Fragment>
+      <>
         <div className={styles.header}>
           <div className={['container', styles.headerImageWrapper].join(' ')}>
-            <img src={logo} className={styles.headerImage} />
+            <img src={logo} className={styles.headerImage} alt="Logo" />
           </div>
         </div>
 
         <>
-          <span
-            className={['container', styles.main].join(' ')}
-            style={{ margin: '50px inherit', display: 'flex', justifyContent: 'space-evenly' }}
-          >
-            <img src={img1} style={{ maxHeight: "15em", display: 'block' }} />
-            <img src={img2} style={{ maxHeight: "15rem", display: 'block' }} />
+          <span className={['container', styles.imgContainer, styles.main].join(' ')} >
+            <img src={img1} className={styles.headerImg} alt="First Header" />
+            <img src={img2} className={styles.headerImg} alt="Second Header" />
           </span>
         </>
 
@@ -191,7 +188,7 @@ export class ShopApp extends React.Component<{}, ShopAppState> {
             </div>
           </Modal>
         </>
-      </React.Fragment>
+      </>
     );
   }
 }
