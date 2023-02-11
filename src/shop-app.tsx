@@ -64,22 +64,21 @@ export class ShopApp extends React.Component<{}, ShopAppState> {
       this.setState({ products: data, prodCount: data.length });
     });
   }
-  
+
   favClick(title: string) {
-    const prods = this.state.products;
-    const idx = lodash.findIndex(prods, { title: title })
-    let currentFavs = this.state.numFavorites
-    let totalFavs: any;
+    const prods = this.state.products.map((prod) => {
+      if (prod.title === title) {
+        return {
+          ...prod,
+          isFavorite: !prod.isFavorite,
+        };
+      }
+      return prod;
+    });
 
-    if (prods[idx].isFavorite) {
-      prods[idx].isFavorite = false;
-      totalFavs = --currentFavs
-    } else {
-      totalFavs = ++currentFavs
-      prods[idx].isFavorite = true;
-    }
+    const numFavorites = prods.filter((prod) => prod.isFavorite).length;
 
-    this.setState(() => ({ products: prods, numFavorites: totalFavs }));
+    this.setState({ products: prods, numFavorites });
   }
 
   onSubmit(payload: { title: string; description: string, price: string }) {
