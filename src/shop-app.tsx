@@ -1,5 +1,4 @@
 import * as React from "react";
-import lodash from 'lodash';
 import { Button } from "./components/button";
 import ProductList from "./components/product-list-components";
 import styles from "./shopApp.module.css";
@@ -45,7 +44,7 @@ export class ShopApp extends React.Component<{}, ShopAppState> {
   componentDidMount() {
 
     document.title = "Droppe refactor app";
-    this.getProducts();
+    // this.getProducts();
   }
 
   getProducts() {
@@ -90,7 +89,7 @@ export class ShopApp extends React.Component<{}, ShopAppState> {
 
     this.setState({
       products: updated,
-      prodCount: lodash.size(this.state.products) + 1,
+      prodCount: updated.length,
       isOpen: false,
       isShowingMessage: true,
       message: 'Adding product...'
