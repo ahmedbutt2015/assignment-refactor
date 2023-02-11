@@ -44,7 +44,7 @@ export class ShopApp extends React.Component<{}, ShopAppState> {
   componentDidMount() {
 
     document.title = "Droppe refactor app";
-    // this.getProducts();
+    this.getProducts();
   }
 
   getProducts() {
