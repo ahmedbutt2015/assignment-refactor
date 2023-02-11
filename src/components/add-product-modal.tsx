@@ -22,7 +22,7 @@ export default class AddProductModal extends React.Component<IAddProductProps, {
             });
             }.bind(this)}><FaTimes /></div>
 
-                <Form on-submit={this.props.onSubmit} />
+                <Form onSubmit={this.props.onSubmit} />
                 </div>
             </Modal>
         </>;
