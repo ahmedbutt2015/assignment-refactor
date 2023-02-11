@@ -82,26 +82,23 @@ export class ShopApp extends React.Component<{}, ShopAppState> {
   }
 
   onSubmit(payload: { title: string; description: string, price: string }) {
-    const updated = lodash.clone(this.state.products);
-    updated.push({
-      title: payload.title,
-      description: payload.description,
-      price: payload.price
-    });
+    const updated = [
+      ...this.state.products,
+      {
+        title: payload.title,
+        description: payload.description,
+        price: payload.price,
+        isFavorite: false,
+      },
+    ];
 
     this.setState({
       products: updated,
-      prodCount: lodash.size(this.state.products) + 1
-    });
-
-    this.setState({
+      prodCount: lodash.size(this.state.products) + 1,
       isOpen: false,
-    });
-
-    this.setState({
       isShowingMessage: true,
       message: 'Adding product...'
-    })
+    });
 
     // **this POST request doesn't actually post anything to any database**
     fetch('https://fakestoreapi.com/products', {
