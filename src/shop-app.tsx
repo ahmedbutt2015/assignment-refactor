@@ -25,41 +25,46 @@ interface ShopAppState {
   numFavorites: number;
   prodCount: number;
 }
+const fakeApiBaseUrl = 'https://fakestoreapi.com';
 
 
 export class ShopApp extends React.Component<{}, ShopAppState> {
   constructor(props: any) {
+
     super(props);
 
     this.favClick = this.favClick.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
-    this.state = { products: [], isOpen: false, isShowingMessage: false, message: '', numFavorites: 0, prodCount: 0 };
-
-    fetch('https://fakestoreapi.com/products').then((response) => {
-      let jsonResponse = response.json();
-
-      jsonResponse.then((rawData) => {
-        let data = [];
-
-        for (let i = 0; i < rawData.length; i++) {
-          let updatedProd = rawData[i];
-          data.push(updatedProd);
-        }
-        this.setState({
-          products: data,
-        });
-        this.setState({
-          prodCount: data.length
-        })
-      });
-    });
+    this.state = { 
+      products: [],
+      isOpen: false,
+      isShowingMessage: false,
+      message: '',
+      numFavorites: 0,
+      prodCount: 0 
+    };
   }
 
   componentDidMount() {
-    document.title = "Droppe refactor app"
+
+    document.title = "Droppe refactor app";
+    this.getProducts();
   }
 
+  getProducts() {
+    
+    fetch(`${fakeApiBaseUrl}/products`)
+    .then((response) => response.json())
+    .then((rawData) => {
+      const data = rawData.map((data: Object) => ({
+        ...data,
+        isFavorite: false,
+      }));
+      this.setState({ products: data, prodCount: data.length });
+    });
+  }
+  
   favClick(title: string) {
     const prods = this.state.products;
     const idx = lodash.findIndex(prods, { title: title })
